@@ -1,13 +1,12 @@
 {
   "name": "avainfo",
   "version": "0.1.0",
-  "homepage": "https://ponty-lab.github.io/",
+  "homepage": "https://ponty-lab.github.io",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
-    "gh-pages": "^4.0.0",
     "mapbox-gl": "^2.9.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -42,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
