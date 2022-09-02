@@ -1,1 +1,0 @@
-# ponty-lab.github.io
