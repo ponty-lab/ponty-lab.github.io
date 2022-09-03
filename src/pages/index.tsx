@@ -1,19 +1,25 @@
-import React, { useRef, useEffect } from 'react';
-import mapboxgl from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import React, { useRef, useEffect, useState } from 'react';
+// @ts-ignore
+import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXZhaW5mbyIsImEiOiJjbDVxbDVjOTIxNDFjM2lvZWQzcDF4dndoIn0.W8Q4-jsphhQfIfCQ3grrsw'
 
 const Home = () => {
 
-    const mapContainer = useRef(null);
+    const mapContainer = useRef<any>(null);
 
+    const [lng, setLng] = useState(9.45);
+    const [lat, setLat] = useState(45.4);
+    const [zoom, setZoom] = useState(6);
 
     useEffect(() => {
+
         const map = new mapboxgl.Map({
-            container: mapContainer.current ?? '',
+            container: mapContainer.current,
             style: 'mapbox://styles/mapbox/light-v10',
-            center: [9.45, 45.4],
-            zoom: 6
+            pitchWithRotate: false,
+            center: [lng, lat],
+            zoom: zoom
         });
 
         map.on('load', () => {
@@ -64,14 +70,14 @@ const Home = () => {
                     ],
                 }
             });
-        });
-        return () => map.remove()
+        }
+        );
 
+        return () => map.remove();
     }, []);
 
-
     return (
-        <div className='map-wrap'>
+        <div>
             <div ref={mapContainer} className="map-container" />
         </div>
 
