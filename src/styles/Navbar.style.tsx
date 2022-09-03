@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import {MarkGithubIcon} from '@primer/octicons-react'
 
 interface styledNavProps {
-    extendNavBar: boolean;
+    extendNavBar?: boolean;
+    animate?: boolean;
     reverse?: boolean;
 }
 
@@ -36,14 +36,18 @@ export const RightContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding-right: 5%;
+  margin-right: 25px;
 `;
 
 export const LeftContainer = styled.div`
   flex: 30%;
   display: flex;
   justify-content: flex-start;
-  padding-left: 50px;
+  margin-left: 50px;
+
+  @media (max-width: 900px) {
+    margin-left: 20px;
+  }
 `;
 
 export const NavbarLinkContainer = styled.div`
@@ -78,30 +82,34 @@ export const NavLinkExtended = styled(Link)`
 
 export const Logo = styled.img`
     margin: 10px;
-    max-width: 145px;
+    max-width: 125px;
     height: auto;
 `;
 
 export const OpenLinkButton = styled.button<styledNavProps>`
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
   color: rgba(40,104,130, 0.95);
-  font-size: 45px;
+  //font-size: ${(props) => (props.extendNavBar ? "40px" : "45px")};
   cursor: pointer;
-  animation-name:  ${(props) => (props.extendNavBar ? "spin" : null)};
-  animation-direction: ${(props) => (props.reverse ? "normal" : "reverse")};
-  animation-duration: ${(props) => (props.reverse ? "300ms" : "100ms")};
+  animation-name:  ${(props) => (props.animate ? "spin" : null)};
+  animation-direction: ${(props) => (props.extendNavBar ? "normal" : "reverse")};
+  animation-duration: ${(props) => (props.extendNavBar ? "300ms" : "150ms")};
   animation-fill-mode: both;
+
   @keyframes spin {
     from {
-        transform:rotate(0deg);
+        transform:rotate(90deg);
     }
     to {
-        transform:rotate(180deg);
+        transform:rotate(270deg);
     }
-}
+  }
 
   @media (min-width: 900px) {
     display:none;
@@ -112,8 +120,9 @@ export const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  background: none;
+  width: 45px;
+  height: 45px;
 `
 
 export const NavbarExtendedContainer = styled.div`
@@ -121,7 +130,7 @@ export const NavbarExtendedContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     margin: 10px;
-    margin-left: 50px;
+    margin-left: 20px;
 
     @media (min-width: 900px) {
         display: none;
