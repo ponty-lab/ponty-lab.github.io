@@ -1,95 +1,112 @@
-# AvaInfo Vector Tileset 
+# Avalanche Danger Vector Tileset 
 
-This vector tileset is Mapbox compatible and generates [CAAMLv5] compliant json files. AvaInfo vector tiles follows the [Mapbox tile specification](https://docs.mapbox.com/data/tilesets/guides/vector-tiles-standards/).
 
-The tileset has been processed for zoom levels 0 - 6 (inclusive). 
+**AvaInfo Danger Map** is a Mapbox-hosted vector tileset that includes geometries and metadata for avalanche danger levels in the Alps and more information from the bulletin reports. Avalanche Danger vector tileset follows the [Mapbox tile specification](https://docs.mapbox.com/data/tilesets/guides/vector-tiles-standards/).
+
+
 
 ## Endpoint
 
 
-```bash
+```
 mapbox://avainfo.avalanche-danger-map
 ```
 
-You can request tilesets directly using the tileset ID in a request to [Mapbox Vector Tiles API](https://docs.mapbox.com/help/glossary/vector-tiles-api/)
+You can request tilesets directly using the tileset ID: `avainfo.avalanche-danger-map` in a request to [Mapbox Vector Tiles API](https://docs.mapbox.com/help/glossary/vector-tiles-api/).
 
 
 ## Fields
 
-Bulletin reports vary accross regions. To the extent possible, fields follow the naming conventions used by CAAMLv6. 
+The Avainfo Danger tileset contains one layer with the following fields adopting the <a href="https://www.avalanches.org/standards/">EAWS standards</a>. Optional fields are marked in *italics* under type.
 
 |Fields                                                     |Type   |Description                                                                                                                                          |
 |:-----------------------------------------------------------|:-------|:-----------------------------------------------------------------------------------------------------------------------------------------------------|
-|`avalancheActivityComment`                                   |string |Avalanche activity                                                                                                                                  |
-|`avalancheActivityHighlights`                                |string |Short highlight of avalanche activity                                                                                                                |
-|`avalancheSituation\_\[num\]\_aspects`                       |string |One or more of N, NE, E, SE, S, SW, W, NE                                                                                                            |
-|`avalancheSituation\_\[num\]\_elevation\_lowerBound\_numeric`|number |Elevation below a certain bound in m.                                                                                                                |
-|`avalancheSituation\_\[num\]\_elevation\_lowerBound\_string` |string |Elevation above a certain bound using pattern `treeline\|0\|\[1-9\]\[0-9\]\*\[0\]\[0\]+`                                                               |
-|`avalancheSituation\_\[num\]\_elevation\_upperBound\_numeric`|number |Elevation below a certain bound in m                                                                                                                 |
-|`avalancheSituation\_\[num\]\_elevation\_upperBound\_string` |string |Elevation above a certain bound using pattern `treeline\|0\|\[1-9\]\[0-9\]\*\[0\]\[0\]+`                                         |
-|`avalancheSituation\_\[num\]\_terrainFeature`                |string |comments on terrain features                                                                                                                         |
-|`avalancheSituation\_\[num\]\_type`                          |string |One of new\_snow, wind\_slab, persistent\_weak\_layers, wet\_snow, gliding\_snow, cornices, no\_distinct\_avalanche\_problem or favourable\_situation|
-|`avalancheSituation\_\[num\]\_validTimePeriod`               |string |One of earlier, later or allDay                                                                                                                      |
+|`avalancheActivityComment`                                   |*string* | Comments on avalanche activity                                                                                                                                  |
+|`avalancheActivityHighlights`                                |*string* |Short highlight of avalanche activity                                                                                                |
+|`avalancheSituation_<num>_aspects`                       |*string* | Aspects affected by the avalanche problem. One or more of N, NE, E, SE, S, SW, W, NE                                          |
+|`avalancheSituation_<num>_elevation_lowerBound_numeric`|*number* | Avalanche problem applies below the elevation bound, given in m. |
+|`avalancheSituation_<num>_elevation_lowerBound_string` | *string* | Elevation can be treeline or a string numerical value in m using pattern `treeline\|0\|[1-9][0-9]*[0][0]+m`                                                  |
+|`avalancheSituation_<num>_elevation_upperBound_numeric`|*number* |Avalanche problem applies below the elevation bound, given in m. |
+|`avalancheSituation_<num>_elevation_upperBound_string` |*string* |Elevation can be treeline or a string numerical value in m using pattern `treeline\|0\|[1-9][0-9]*[0][0]m`                                       |
+|`avalancheSituation_<num>_terrainFeature`                |*string* |Comments on terrain features affected by the avalanche problem                                                      |
+|`avalancheSituation_<num>_type`                          |string |Type of avalanche problem. One of new\_snow, wind\_slab, persistent\_weak\_layers, wet\_snow, gliding\_snow, cornices, no\_distinct\_avalanche\_problem or favourable\_situation|
+|`avalancheSituation_<num>_validTimePeriod`               |*string* | The part of the day affected by the avalanche problem. One of earlier, later or allDay                                                                                                                      |
 |`bulletinDate`                                               |string |Bulletin date in format YYYY-MM-DD                                                                                                                   |
-|`bulletinId`                                                 |string |Unique ID for bulletin report                                                                                                                        |
+|`bulletinID`                                                 |string |Unique ID for bulletin report                                                                                                                        |
 |`bulletinURI`                                                |string |URL for bulletin report                                                                                                                              |
 |`dangerPatterns`                                             |       |                                                                                                                                                     |
-|`dangerRating\_\[num\]\_aspect`                              |string |One or more of N, NE, E, SE, S, SW, W, NE                                                                                                            |
-|`dangerRating\_\[num\]\_elevation\_lowerBound\_numeric`      |number |Elevation below a certain bound in m                                                                                                                 |
-|`dangerRating\_\[num\]\_elevation\_lowerBound\_string`       |string |Elevation above a certain bound using pattern `treeline\|0\|\[1-9\]\[0-9\]\*\[0\]\[0\]+`                                                             |
-|`dangerRating\_\[num\]\_elevation\_upperBound\_numeric`      |number |Elevation below a certain bound in m                                                                                                                 |
-|`dangerRating\_\[num\]\_elevation\_upperBound\_string`       |string |Elevation above a certain bound using pattern `treeline\|0\|\[1-9\]\[0-9\]\*\[0\]\[0\]+`                                                            |
-|`dangerRating\_\[num\]\_mainValue`                           |number |One of 1, 2, 3, 4, 5                                                                                                                                 |
-|`dangerRating\_\[num\]\_validTimePeriod`                     |string |One of earlier, later or allDay                                                                                                                      |
+|`dangerRating_<num>_aspect`                              |*string* |Aspects affected by danger rating value. One or more of N, NE, E, SE, S, SW, W, NE                  |
+|`dangerRating_<num>_elevation_lowerBound_numeric`      |*number* |Danger rating applies below the elevation bound given in m.                                                                 |
+|`dangerRating_<num>_elevation_lowerBound_string`       |*string* |Elevation can be treeline or a string numerical value in m using pattern `treeline\|0\|[1-9][0-9]*[0][0]+m`                         |
+|`dangerRating_<num>_elevation_upperBound_numeric`      |*number*|Danger rating applies above the elevation bound given in m.                                                                       |
+|`dangerRating_<num>_elevation_upperBound_string`       |*string* |Elevation can be treeline or a string numerical value in m using pattern `treeline\|0\|[1-9][0-9]*[0][0]+m`                    |
+|`dangerRating_<num>_mainValue_numeric`                           |number | Danger Rating. One of 1, 2, 3, 4 or 5 |
+|`dangerRating_<num>_mainValue_string`                           |number | Danger Rating. One of low, moderate, considerable, high or very high |
+|`dangerRating_<num>_validTimePeriod`                     |string | The part of the day affected by the danger rating. One of earlier, later or allDay                                                                                                                      |
 |`hasDaytimeDependency`                                       |boolean|True if there is an afternoon bulletin report                                                                                                        |
-|`highlights`                                                 |string |Optional short text to highlight an exceptionally dangerous situation                                                                                |
+|`highlights`                                                 |*string* |Optional short text to highlight an exceptionally dangerous situation                                                                                |
 |`lang`                                                      |string |Two-letter language code (ISO 639-1)                                                                                                                 |
-|`maxDangerRating`                                            |number |One of 1, 2, 3, 4, 5                                                                                                                                 |
-|`maxDangerRating\_earlier`                                   |number |One of 1, 2, 3, 4, 5                                                                                                                                 |
-|`maxDangerRating\_later`                                     |number |One of 1, 2, 3, 4, 5                                                                                                                                 |
+|`maxDangerRating_numeric`                                            |number |Maximum danger rating for the day. One of 1, 2, 3, 4, 5                   |
+|`maxDangerRating_string`                                            |number |Maximum danger rating for the day. One of low, moderate, considerable, high or very high                   |
+|`maxDangerRating_earlier_numeric`                                   |*number* |Maximum danger rating for the morning. One of 1, 2, 3, 4, 5      |
+|`maxDangerRating_earlier_string`                                   |*number* |Maximum danger rating for the morning. One of low, moderate, considerable, high or very high     |
+|`maxDangerRating_later_numeric`                                     |*number* |Maximum danger rating for the afternoon. One of 1, 2, 3, 4, 5  |
+|`maxDangerRating_later_string`                                     |*number* |Maximum danger rating for the afternoon. One of low, moderate, considerable, high or very high  |
 |`pdfURI`                                                     |string |URL to pdf of bulletin report                                                                                                                        |
-|`publicationTime`                                            |string |Time and date when the bulletin was issued by the AWS to the Public. ISO 8601 timestamp in UTC or with time zone information.                        |
-|`regionId`                                                   |string |ID of region following <a href="gitlab.com/eaws/eaws-regions">EAWS schema</a>                                                                      |
+|`publicationTime`                                            |string |Time and date when the bulletin was issued by the AWS to the public. ISO 8601 timestamp in UTC or with time zone information.                        |
+|`regionID`                                                   |string |ID of region following <a href="https://gitlab.com/eaws/eaws-regions">EAWS schema</a>                                                                      |
 |`regionName`                                                |string |Name of region                                                                                                                                       |
-|`snowpackStructureComment`                                   |string |Details on snowpack structure                                                                                                                        |
+|`snowpackStructureComment`                                   |*string* |Details on snowpack structure                                                                                                                        |
 |`source`                                                     |string |Name of bulletin provider                                                                                                                            |
-|`tendencyComment`                                            |string |Expected avalance situation tendency after the bulletins period of validitiy                                                                         |
-|`tendencyType`                                               |string |One of decreasing, steady or increasing                                                                                                              |
+|`tendencyComment`                                            |*string* |Comments on expected avalanche situation tendency after the bulletin's period of validity                                                                         |
+|`tendencyType`                                               |*string* |One of decreasing, steady or increasing                                                                                                              |
 |`validEndTime`                                               |string |Validity end time of bulletin report as date-time string                                                                                             |
 |`validStartTime`                                             |string |Validity start time of bulletin report as date-time string                                                                                           |
-|`wxSynopsisComments`                                         |string |Weather forecast information                                                                                                                         |
+|`wxSynopsisComments`                                         |*string* |Weather forecast information                                                                                                                         |
+
 
 ## Data sources and updates
 
-The following regions and localizations are currently supported:
+AvaInfo Danger Map vector tileset is based on bulletin reports made openly available by national and regional avalanche warning services in the following languages.
 
 |Region  | Data Source   | Available languages  |
 |:--------------|:-------|:---------------------------------------------|
-|AT Tirol| https://avalanche.report | EN |
-| AT Kärnten | https://lawinenwarndienst.ktn.gv.at/ | DE |
-| AT Salzburg | https://lawine.salzburg.at/ | EN/DE |
-| AT Styria | https://www.lawine-steiermark.at/ | EN/DE |
-| AT Vorarlberg | https://warndienste.cnv.at/dibos/lawine/index.html | EN/DE |
-| CH (including FL) | https://www.slf.ch/en/index.html | EN/DE |
-| DE Bavaria | https://www.lawinenwarndienst-bayern.de | EN/DE |
-| ES Val d'Aran | https://lauegi.conselharan.org/ | EN/DE |
-| FR | https://meteofrance.com/meteo-montagne | FR |
-| IT Bolzano | https://avalanche.report | EN/DE |
-| IT Trentino | https://avalanche.report | EN/DE |
-| IT Piemonte | https://bollettini.aineva.it/ | EN/DE/FR |
-| IT Valle d’Aosta | https://bollettini.aineva.it/ | EN/DE/FR |
-| IT Lombardia | https://bollettini.aineva.it/ | EN/DE/FR |
-| IT Veneto | https://bollettini.aineva.it/ | EN/DE/FR |
-| IT Friuli – Venezia Giulia | https://bollettini.aineva.it/ | EN/DE/FR |
-| IT Marche | https://bollettini.aineva.it/ | EN/DE/FR|
-| SI | http://meteo.arso.gov.si/ | SI |
+|**Austria (AT)** |
+|`Tirol`| https://avalanche.report | EN |
+| `Kärnten` | https://lawinenwarndienst.ktn.gv.at/ | DE |
+| `Salzburg` | https://lawine.salzburg.at/ | EN |
+| `Styria` | https://www.lawine-steiermark.at/ | EN |
+| `Vorarlberg` | https://warndienste.cnv.at/dibos/lawine/index.html | EN |
+|**Switzerland (CH)** |
+| `CH` | https://www.slf.ch/en/avalanche-bulletin-and-snow-situation.html | EN |
+|**Germany (DE)**|
+| `Bavaria` | https://www.lawinenwarndienst-bayern.de | EN |
+|**Spain (ES)**|
+| `Val d'Aran` | https://lauegi.conselharan.org/ | EN |
+|**France (FR)**|
+| `FR` | https://meteofrance.com/meteo-montagne | FR |
+|**Italy (IT)**|
+| `Bolzano` | https://avalanche.report | EN |
+| `Trentino` | https://avalanche.report | EN |
+| `Piemonte` | https://bollettini.aineva.it/ | EN |
+| `Valle d’Aosta` | https://bollettini.aineva.it/ | EN |
+| `Lombardia` | https://bollettini.aineva.it/ | EN |
+| `Veneto` | https://bollettini.aineva.it/ | EN |
+| `Friuli – Venezia Giulia` | https://bollettini.aineva.it/ | EN |
+| `Marche` | https://bollettini.aineva.it/ | EN |
+|**Slovenia (SI)**|
+| `SI` | http://meteo.arso.gov.si/ | SI |
 
 ### Data updates
 
-During the winter season, AvaInfo vector tileset is updated hourly from 6:00--19:00 each day. Depending on the region, the winter season usually runs from late November to early April. Avalanche bulletins are usually issued once a day at 17:00/18:00. Bulletin updates are sometimes issued by 9:00am for that day and rarely may be published at other times. 
+AvaInfo Danger Map vector layers are **<ins>only published during the winter season</ins>**. 
 
-AvaInfo vector layers are not published uutside of the winter period due to the lack of avalanche bulletins. 
+AvaInfo Danger Map tileset is updated at least once a day during the winter season. Avalanche Warning Services usually issue a bulletin report at 17:00/18:00 each day. Further bulletin updates can be issued at 8:00/9:00 the following morning and on rare occasions published at other times. Bulletin reports are regularly checked throughout the day and updated tilesets published accordingly. 
 
 ### Attribution
 
-When you publicly use styles or software that use AvaInfo vector tiles, you must display proper attribution. 
+When you publicly use styles or software that use AvaInfo vector tiles, you must display proper attribution.
+
+## Warning
+
+The Avalanche Danger tilesets are produced from third party data and may be out of date or incorrect. Using the tilesets for any purpose is at your own risk, and AvaInfo is not responsible for any actions you take based on any information contained in this tileset.

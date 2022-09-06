@@ -1,27 +1,17 @@
 
-  .reactMarkDown ul li {
-    line-height: 1.5;
-  }
 
   .reactMarkDown h1 {
     margin-top: 42px;
   }
 
   .reactMarkDown h2 {
-    margin-top: 24px;
-    margin-bottom: 16px;
-    line-height: 1.25em;
-    padding-bottom: 0.3em;
-  }
-
-  .reactMarkDown h3 {
-    margin-top: 24px;
-    margin-bottom: 16px;
-    line-height: 1.25;
+    margin-top: 36px;
+    font-weight: 400;
+    font-size: 1.6em;
+    padding-top: 0.2em;
   }
 
   .reactMarkDown p {
-    padding-top: 1rem;
     font-size: 16px;
     line-height: 1.5;
     word-wrap: break-word;
@@ -35,24 +25,20 @@
   }
 
   .reactMarkDown code {
-    color: #273d56;
+    color: #0e2127;;
     font-weight: 400;
     white-space: pre-wrap;
     word-wrap: break-word;
     font-size: 90%;
     line-height: 1.5em;
+    padding: 2px 4px;
   }
 
-  .reactMarkDown button {
-    padding-left: 3px!important;
-    padding-right: 3px!important;
-    padding-top: 3px!important;
-    padding-bottom: 3px!important;
-    display: block!important;
-    border-radius: 4px!important;
-    font-weight: 700;
-    background-color: #4264fb;
-    color: #fff;
-    font-size: 12px;
-    transition: background-color .125s,border-color .125s,color .125s;
+  .reactMarkDown pre code {
+    color: #273d56;
+  }
+
+  .reactMarkDown th, td {
+    padding-right: 10px;
+    padding-bottom: 5px;
   }

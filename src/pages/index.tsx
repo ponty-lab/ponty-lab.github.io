@@ -1,16 +1,62 @@
 import React, { useRef, useEffect, useState } from 'react';
 // @ts-ignore
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import AvaColors from '../styles/colors.style';
+import Sidebar from '../components/sidebar';
+import ToggleButton from '../components/toggleButton';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXZhaW5mbyIsImEiOiJjbDVxbDVjOTIxNDFjM2lvZWQzcDF4dndoIn0.W8Q4-jsphhQfIfCQ3grrsw'
 
 const Home = () => {
 
+    const options = [
+        {
+            name: 'AM',
+            property: "maxDanger_earlier",
+            paint: [
+                "interpolate",
+                ["linear"],
+                ["get", "maxDangerRating_earlier_numeric"],
+                1,
+                AvaColors[1],
+                2,
+                AvaColors[2],
+                3,
+                AvaColors[3],
+                4,
+                AvaColors[4],
+                5,
+                AvaColors[5],
+            ],
+        },
+        {
+            name: 'PM',
+            property: "maxDanger_later",
+            paint: [
+                "interpolate",
+                ["linear"],
+                ["get", "maxDangerRating_later_numeric"],
+                1,
+                AvaColors[1],
+                2,
+                AvaColors[2],
+                3,
+                AvaColors[3],
+                4,
+                AvaColors[4],
+                5,
+                AvaColors[5],
+            ]
+        }
+    ]
+
     const mapContainer = useRef<any>(null);
 
-    const [lng, setLng] = useState(9.45);
-    const [lat, setLat] = useState(45.4);
-    const [zoom, setZoom] = useState(6);
+    const [active, setActive] = useState<Record<string, any>>(options[0]);
+    const [map, setMap] = useState<any>(null);
+    const [regionName, setRegionName] = useState<string | null>(null)
+    const [dangerAM, setDangerAM] = useState<number>(0)
+    const [dangerPM, setDangerPM] = useState<number>(0)
 
     useEffect(() => {
 
@@ -18,15 +64,17 @@ const Home = () => {
             container: mapContainer.current,
             style: 'mapbox://styles/mapbox/light-v10',
             pitchWithRotate: false,
-            center: [lng, lat],
-            zoom: zoom
+            dragRotate: false,
+            center: [10.6, 46.4],
+            zoom: 5.9
         });
 
-        map.on('load', () => {
+        map.on('load', (e: any) => {
             map.addSource('avalanche-map', {
                 type: 'vector',
                 url: 'mapbox://avainfo.avalanche-danger-map'
             });
+
             map.addLayer({
                 'id': 'avalanche-danger',
                 'type': 'fill',
@@ -34,24 +82,10 @@ const Home = () => {
                 'source-layer': 'avalanche-danger-ratings',
                 'paint': {
                     'fill-antialias': false,
-                    "fill-color": [
-                        "interpolate",
-                        ["linear"],
-                        ["get", "maxDangerRating"],
-                        1,
-                        '#ccff66',
-                        2,
-                        "#ffff00",
-                        3,
-                        "#ff9900",
-                        4,
-                        '#ff0000',
-                        5,
-                        '#600000',
-                    ],
-                    "fill-opacity": 0.65
+                    "fill-opacity": 0.65,
                 }
             });
+
             map.addLayer({
                 'id': 'avalanche-danger-line',
                 'type': 'line',
@@ -70,15 +104,81 @@ const Home = () => {
                     ],
                 }
             });
-        }
-        );
+
+            map.setPaintProperty('avalanche-danger', 'fill-color', active.paint);
+
+            setMap(map);
+
+        });
+
+/*         map.once('idle', (e: any) => {
+            const features = map.queryRenderedFeatures(e.point);
+            if (features.length) {
+                const feature = features[0];
+                setRegionName(feature.properties.regionName)
+                setDangerLevelString(feature.properties.maxDangerRating_string)
+                setDangerLevelNumeric(feature.properties.maxDangerRating_numeric)
+            }
+        }); */
+
+        map.on('mousemove', 'avalanche-danger', (e: any) => {
+            console.log(e.point)
+            const features = map.queryRenderedFeatures(e.point);
+            if (features.length) {
+                const feature = features[0];
+                setRegionName(feature.properties.regionName)
+                setDangerAM(feature.properties.maxDangerRating_earlier_numeric)
+                setDangerPM(feature.properties.maxDangerRating_later_numeric)
+            }
+        });
+
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'avalanche-danger', () => {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'avalanche-danger', () => {
+            map.getCanvas().style.cursor = '';
+        });
+
+        map.touchZoomRotate.disableRotation();
+
 
         return () => map.remove();
-    }, []);
+    },[]);
+
+    useEffect(() => {
+        paint();
+    }, [active]);
+
+    const paint = () => {
+        if (map) {
+            map.setPaintProperty('avalanche-danger', 'fill-color', active.paint);
+        }
+    };
+
+    const changeState = (i: number) => {
+        setActive(options[i]);
+    };
 
     return (
         <div>
-            <div ref={mapContainer} className="map-container" />
+            <Sidebar
+                regionName={regionName}
+                dangerAM={dangerAM}
+                dangerPM={dangerPM}
+                name={active.name}
+            />
+            <div 
+            ref={mapContainer} 
+            className="map-container" 
+            />
+            <ToggleButton
+                options={options}
+                property={active.property}
+                changeState={changeState}
+            />
         </div>
 
     );

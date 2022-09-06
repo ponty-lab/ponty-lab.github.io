@@ -43,10 +43,10 @@ export const LeftContainer = styled.div`
   flex: 30%;
   display: flex;
   justify-content: flex-start;
-  margin-left: 50px;
+  margin-left: 30px;
 
   @media (max-width: 900px) {
-    margin-left: 20px;
+    margin-left: 10px;
   }
 `;
 
