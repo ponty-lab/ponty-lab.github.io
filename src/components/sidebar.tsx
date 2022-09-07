@@ -16,19 +16,25 @@ const DangerName: Record<number, string> = {
     5: "Very High"
 }
 
-const Sidebar = (props :Props) => {
+const Sidebar = (props: Props) => {
 
     const dangerLevel = props.name === 'AM' ? props.dangerAM : props.dangerPM
 
-
-
     return (
         props.regionName ?
-            <div 
+            <div
                 className="sidebar"
-            style={{ backgroundColor: AvaColors[dangerLevel], opacity: 0.65 }}
+                style={{
+                    backgroundColor: 'white', opacity: 0.85,
+                    borderBottomColor: AvaColors[dangerLevel],
+                    borderLeftColor: AvaColors[dangerLevel],
+                    borderLeftStyle: 'solid',
+                    borderLeftWidth: 5,
+                    borderBottomStyle: 'solid',
+                    borderBottomWidth: 3
+                }}
             >
-               {props.regionName} | {DangerName[dangerLevel]}
+                {props.regionName} | {DangerName[dangerLevel]}
             </div >
 
             : null

@@ -179,6 +179,9 @@ const Home = () => {
                 property={active.property}
                 changeState={changeState}
             />
+            <div style={{position: 'absolute', top: 100, right: 30, zIndex: 1, backgroundColor: 'transparent'}}>
+                <h2 className='theme-color'>6 April 2022</h2>
+            </div>
         </div>
 
     );
