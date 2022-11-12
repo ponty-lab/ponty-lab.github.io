@@ -13,7 +13,7 @@ export const Nav = styled.nav`
 `;
 
 export const NavLink = styled(Link)`
-  color: rgba(255,255,255, 1);
+  color: rgba(255, 255, 255, 1);
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -22,28 +22,27 @@ export const NavLink = styled(Link)`
   cursor: pointer;
   position: relative;
   transition: all s;
-  &:after{
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: auto;
-      width: 0%;
-      content: '.';
-      color: transparent;
-      background: #aaa;
-      height: 1px;
-      text-align: left;
-      content: '.';
-      margin: 0;
-      opacity: 0;
-      
+  &:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: ".";
+    color: transparent;
+    background: #aaa;
+    height: 1px;
+    text-align: left;
+    content: ".";
+    margin: 0;
+    opacity: 0;
   }
   &.active {
-    color: rgba(255,255,255, 1);
+    color: rgba(255, 255, 255, 1);
   }
   &:hover {
-    color: rgba(255,255,255, .5);
+    color: rgba(255, 255, 255, 0.5);
     z-index: 1;
   }
   &:hover:after {

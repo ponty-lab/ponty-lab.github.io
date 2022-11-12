@@ -2,21 +2,21 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 interface styledNavProps {
-    extendNavBar?: boolean;
-    animate?: boolean;
-    reverse?: boolean;
+  extendNavBar?: boolean;
+  animate?: boolean;
+  reverse?: boolean;
 }
 
-const navHeight = '60px';
+const navHeight = "60px";
 
 export const Nav = styled.nav<styledNavProps>`
   width: 100%;
   height: ${(props) => (props.extendNavBar ? "100vh" : navHeight)};
-  background-color: white;
+  background-color: ${({ theme }) => theme.background};
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  box-shadow: 20px 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 20px 4px 10px rgba(0, 0, 0, 0.05);
   border-bottom: 1px solid #eaecef;
   z-index: 20;
 
@@ -29,7 +29,7 @@ export const NavbarInnerContainer = styled.div`
   width: 100%;
   height: navHeight;
   display: flex;
-`
+`;
 
 export const RightContainer = styled.div`
   flex: 70%;
@@ -55,25 +55,25 @@ export const NavbarLinkContainer = styled.div`
 `;
 
 export const NavLink = styled(Link)`
-    color: rgba(40,104,130, 0.95);
-    font-weight: 600;
-    text-decoration: none;
-    margin: 10px;
-    display: flex;
-    align-items: center;
+  color: ${({ theme }) => theme.primaryColor};
+  font-weight: 600;
+  text-decoration: none;
+  margin: 10px;
+  display: flex;
+  align-items: center;
 
-    &:hover {
-      color: #d86623;
-      z-index: 1;
-    }
-    
-    @media (max-width: 900px) {
-    display:none;
-  }    
+  &:hover {
+    color: ${({ theme }) => theme.accentColor};
+    z-index: 1;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
 export const NavLinkExtended = styled(Link)`
-  color: rgba(40,104,130, 0.95);
+  color: ${({ theme }) => theme.primaryColor};
   font-size: 1.25em;
   font-weight: 600;
   text-decoration: none;
@@ -81,9 +81,9 @@ export const NavLinkExtended = styled(Link)`
 `;
 
 export const Logo = styled.img`
-    margin: 10px;
-    max-width: 125px;
-    height: auto;
+  margin: 10px;
+  max-width: 125px;
+  height: auto;
 `;
 
 export const OpenLinkButton = styled.button<styledNavProps>`
@@ -94,25 +94,26 @@ export const OpenLinkButton = styled.button<styledNavProps>`
   justify-content: center;
   align-items: center;
   border: none;
-  color: rgba(40,104,130, 0.95);
+  color: ${({ theme }) => theme.primaryColor};
   //font-size: ${(props) => (props.extendNavBar ? "40px" : "45px")};
   cursor: pointer;
-  animation-name:  ${(props) => (props.animate ? "spin" : null)};
-  animation-direction: ${(props) => (props.extendNavBar ? "normal" : "reverse")};
+  animation-name: ${(props) => (props.animate ? "spin" : null)};
+  animation-direction: ${(props) =>
+    props.extendNavBar ? "normal" : "reverse"};
   animation-duration: ${(props) => (props.extendNavBar ? "300ms" : "150ms")};
   animation-fill-mode: both;
 
   @keyframes spin {
     from {
-        transform:rotate(90deg);
+      transform: rotate(90deg);
     }
     to {
-        transform:rotate(270deg);
+      transform: rotate(270deg);
     }
   }
 
   @media (min-width: 900px) {
-    display:none;
+    display: none;
   }
 `;
 
@@ -123,16 +124,16 @@ export const IconContainer = styled.div`
   background: none;
   width: 45px;
   height: 45px;
-`
+`;
 
 export const NavbarExtendedContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 10px;
-    margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 10px;
+  margin-left: 20px;
 
-    @media (min-width: 900px) {
-        display: none;
-    }
+  @media (min-width: 900px) {
+    display: none;
+  }
 `;

@@ -1,11 +1,10 @@
 import React from "react";
 
 type Props = {
-    changeState: (i: number) => void;
-    property: string,
-    options: Record<string, any>
-}
-
+  changeState: (i: number) => void;
+  property: string;
+  options: Record<string, any>;
+};
 
 const ToggleButton = (props: Props) => {
   const renderOptions = (option: any, i: number) => {
@@ -24,7 +23,10 @@ const ToggleButton = (props: Props) => {
     );
   };
   return (
-    <div className="toggle-group" style={{position: "absolute", top: 70, right: 0 }}>
+    <div
+      className="toggle-group"
+      style={{ position: "absolute", top: 70, right: 0 }}
+    >
       {props.options.map(renderOptions)}
     </div>
   );
